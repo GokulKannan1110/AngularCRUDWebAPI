@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Employee
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              Create
+            </div>
+            <div class="card-body">
+              <form [formGroup]="employeeFormGroup" (ngSubmit)="OnSubmit()">
+                <div class="row">
+                  <div class="col-sm-12 mb-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <label>Mobile No</label>
+                    <input type="text" class="form-control" formControlName="mobileNo">
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <label>Email ID</label>
+                    <input type="text" class="form-control" formControlName="email">
+                  </div>
+                  <div class="col-sm-12 mb-3">
+                    <button class="btn btn-primary" type="submit" [disabled]="employeeFormGroup.invalid">{{isEditMode ? "Update" : "Create"}}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="alert alert-info" *ngIf="employeeArray.length == 0">
+            No Employees Found
+          </div>
+          <table class="table" *ngIf="employeeArray.length > 0">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Mobile No</td>
+                <td>Email ID</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of employeeArray">
+                <td>{{emp.name}}</td>
+                <td>{{emp.mobileNo}}</td>
+                <td>{{emp.email}}</td>
+                <td>
+                  <button (click)="FillForm(emp)" class="btn btn-link">Edit</button>
+                  <button (click)="DeleteEmployee(emp)" class="btn btn-link">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
